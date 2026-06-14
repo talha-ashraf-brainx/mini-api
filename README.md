@@ -2,6 +2,8 @@
 
 A web-based API client — a simplified Postman for creating, organizing, executing, and inspecting HTTP requests. Built with React to practice scalable architecture using Context API and reducers.
 
+**Live demo:** Try it online — [check it out here](https://miniapi.pocketmicros.com/).
+
 [![bIVMR.png](https://s13.gifyu.com/images/bIVMR.png)](https://gifyu.com/image/bIVMR)
 
 ## Features

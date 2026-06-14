@@ -4,17 +4,19 @@ const ICON_HEIGHT = {
   sm: 'h-7',
   md: 'h-8',
   lg: 'h-9',
+  xl: 'h-12',
 };
 
 const TEXT_SIZE = {
   sm: 'text-sm',
   md: 'text-base',
   lg: 'text-lg',
+  xl: 'text-2xl',
 };
 
 /**
  * @param {object} props
- * @param {'sm' | 'md' | 'lg'} [props.size]
+ * @param {'sm' | 'md' | 'lg' | 'xl'} [props.size]
  * @param {string} [props.className]
  */
 export default function AppLogo({ size = 'md', className = '' }) {

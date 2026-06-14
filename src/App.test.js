@@ -71,9 +71,23 @@ beforeEach(() => {
   localStorage.clear();
 });
 
-test('renders Mini API shell with empty main state', () => {
+test('renders Mini API shell with welcome state on first visit', () => {
   renderApp();
   expect(screen.getAllByText('Mini API').length).toBeGreaterThan(0);
+  expect(
+    screen.getByRole('heading', { name: /welcome to mini api/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/organize requests in collections/i)
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: /create your first collection/i })
+  ).toBeInTheDocument();
+});
+
+test('shows select-from-sidebar hint when collections exist but none is selected', () => {
+  seedMockAppData();
+  renderApp();
   expect(
     screen.getByText(/select a collection or request/i)
   ).toBeInTheDocument();
@@ -124,6 +138,15 @@ test('renders add collection control', () => {
 });
 
 test('can add a new collection and open collection detail view', () => {
+  renderApp();
+  fireEvent.click(
+    screen.getByRole('button', { name: /create your first collection/i })
+  );
+  expect(screen.getByRole('heading', { name: 'New Collection' })).toBeInTheDocument();
+  expect(screen.getByText(/export as json/i)).toBeInTheDocument();
+});
+
+test('can add a new collection from sidebar control', () => {
   renderApp();
   openSidebar();
   fireEvent.click(screen.getByRole('button', { name: /\+ collection/i }));

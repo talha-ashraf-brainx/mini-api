@@ -532,6 +532,8 @@ export default function Home() {
       sidebarProps={sidebarProps}
       environmentProps={environmentProps}
       mainView={mainView}
+      hasCollections={collections.length > 0}
+      onCreateCollection={handleCreateCollection}
       collectionDetailProps={collectionDetailProps}
       requestProps={requestProps}
       response={response}

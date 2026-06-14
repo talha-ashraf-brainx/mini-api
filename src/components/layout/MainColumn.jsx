@@ -4,11 +4,14 @@ import { RequestBuilder } from '../request';
 import { CollectionDetailView } from '../collections';
 import ResponsePanel from './ResponsePanel';
 import ResizeHandle from './ResizeHandle';
+import WelcomeEmptyState from './WelcomeEmptyState';
 import { useResponseResize } from './useResponseResize';
 
 /**
  * @param {object} props
  * @param {'collection' | 'request' | 'empty'} props.mainView
+ * @param {boolean} props.hasCollections
+ * @param {() => void} props.onCreateCollection
  * @param {object} props.environmentProps
  * @param {object} [props.collectionDetailProps]
  * @param {object} [props.requestProps]
@@ -16,6 +19,8 @@ import { useResponseResize } from './useResponseResize';
  */
 export default function MainColumn({
   mainView,
+  hasCollections,
+  onCreateCollection,
   environmentProps,
   collectionDetailProps,
   requestProps,
@@ -49,7 +54,11 @@ export default function MainColumn({
           <RequestBuilder {...requestProps} tabsEndRef={tabsEndRef} />
         )}
 
-        {mainView === 'empty' && (
+        {mainView === 'empty' && !hasCollections && (
+          <WelcomeEmptyState onCreateCollection={onCreateCollection} />
+        )}
+
+        {mainView === 'empty' && hasCollections && (
           <div className="flex min-h-0 flex-1 items-center justify-center bg-background p-6">
             <p className="text-center text-sm text-muted">
               Select a collection or request from the sidebar to get started.

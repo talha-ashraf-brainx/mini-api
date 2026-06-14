@@ -13,6 +13,8 @@ import { useSidebarResize } from './useSidebarResize';
  * @param {object} props.sidebarProps
  * @param {object} props.environmentProps
  * @param {'collection' | 'request' | 'empty'} props.mainView
+ * @param {boolean} props.hasCollections
+ * @param {() => void} props.onCreateCollection
  * @param {object} [props.collectionDetailProps]
  * @param {object} [props.requestProps]
  * @param {object} props.response
@@ -24,6 +26,8 @@ export default function AppShell({
   sidebarProps,
   environmentProps,
   mainView,
+  hasCollections,
+  onCreateCollection,
   collectionDetailProps,
   requestProps,
   response,
@@ -67,6 +71,8 @@ export default function AppShell({
 
         <MainColumn
           mainView={mainView}
+          hasCollections={hasCollections}
+          onCreateCollection={onCreateCollection}
           environmentProps={environmentProps}
           collectionDetailProps={collectionDetailProps}
           requestProps={requestProps}
