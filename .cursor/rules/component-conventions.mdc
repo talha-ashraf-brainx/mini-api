@@ -1,0 +1,41 @@
+---
+description: React component patterns for Mini API
+globs: src/components/**/*
+alwaysApply: false
+---
+
+# Mini API — Component Conventions
+
+## Files
+
+- One default export per file; filename matches component (`MethodSelector.jsx` → `MethodSelector`).
+- Each domain folder has an `index.js` barrel exporting public components.
+
+## Props and logic
+
+- Keep components presentational during Phase 1; lift state to `Home.jsx` or layout parents when needed.
+- Document non-obvious prop shapes with JSDoc `@param`.
+- No `fetch` or environment resolution inside `src/components/**`.
+
+## UI patterns
+
+- Use `KeyValueEditor` for headers, query params, and environment variables.
+- Use `Tabs` from `shared/` for tabbed panels (request sections, response views).
+- Extract repeated UI into `components/shared/` when used in 2+ domains.
+
+## Tailwind and theming
+
+- Use semantic color utilities from design tokens: `bg-background`, `bg-surface`, `bg-surfaceMuted`, `text-foreground`, `text-muted`, `border-border`, `bg-accent`, `text-accent`, `bg-input`, `ring-ring`.
+- Do not use raw palette classes (`slate-*`, `orange-*`, etc.) in components — define colors in [`src/styles/tokens.css`](src/styles/tokens.css) only.
+- HTTP method colors: `bg-method-get`, `text-method-post`, `bg-method-dotGet`, etc.
+- Theme toggle lives in the sidebar; global theme via `ThemeProvider` and `dark` class on `<html>`.
+- Do not pass `theme="light"|"dark"` props to shared components; tokens handle both modes.
+
+## Responsive layout
+
+- Use Tailwind breakpoints (`sm:`, `lg:`) instead of fixed pixel-only layouts.
+- Navigation on small screens: overlay sidebar drawer via [`MobileHeader`](src/components/layout/MobileHeader.jsx) + [`Sidebar`](src/components/layout/Sidebar.jsx) `isOpen` / `onClose` props; state lives in [`Home.jsx`](src/pages/Home.jsx).
+
+## Subcomponents
+
+- Co-locate tiny helpers in the same file only if under ~30 lines and not reused elsewhere.

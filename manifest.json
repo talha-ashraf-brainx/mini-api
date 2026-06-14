@@ -1,0 +1,25 @@
+{
+  "short_name": "Mini API",
+  "name": "Mini API",
+  "icons": [
+    {
+      "src": "favicon-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#e85d04",
+  "background_color": "#dfe1e6"
+}

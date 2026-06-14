@@ -1,0 +1,36 @@
+---
+description: Mini API folder layout, phases, and import rules
+alwaysApply: true
+---
+
+# Mini API — Project Architecture
+
+Read `IDEA.md` before adding features or changing domain boundaries.
+
+## Folder layout
+
+- UI components live under `src/components/<domain>/` (`layout`, `shared`, `request`, `collections`, `environment`, `response`, `history`).
+- Pages compose the shell in `src/pages/` (e.g. `Home.jsx`).
+- Mock/seed data belongs in `src/data/` (tests and helpers only at runtime).
+- App persistence belongs in `src/storage/` (`appStorage.js` for collections/environments). Context providers hydrate on init and save via storage helpers.
+- Global state (Phase 2+) belongs in `src/context/<Name>/` — not in components.
+- HTTP execution belongs in `src/lib/http/` (one file per method); [`src/utils/requestExecutor.js`](src/utils/requestExecutor.js) is the UI facade.
+- Parsing/helpers belong in `src/utils/` (`envParser.js`, etc.).
+
+## Phase rules
+
+- **Phase 1 (UI):** Presentational components receive props; use local `useState` only for UI (tabs, expand/collapse). No `fetch` in components.
+- **Phase 2 (partial):** `CollectionContext` + `EnvironmentContext` reducers; `RequestContext` / `HistoryContext` still planned.
+- **Collections:** Mutate only via `dispatch` in `src/context/CollectionContext/` — never edit `collections` arrays in components.
+- **Environments:** Mutate only via `dispatch` in `src/context/EnvironmentContext/`. Collection `environmentId` via collection dispatch (`setCollectionEnvironment`, `clearEnvironmentReferences`).
+- **Phase 3 (partial):** Execute requests only via `executeRequest` in `src/utils/requestExecutor.js` (delegates to `src/lib/http/`). No `fetch` in components.
+
+## Imports
+
+- Prefer barrel imports: `from '../components/request'` not deep leaf paths unless same folder.
+- Do not put request/collection/history business logic in `App.js`.
+
+## Styling
+
+- Use Tailwind utility classes in components.
+- Reuse `KeyValueEditor` from `components/shared` for all key-value UIs.
